@@ -1,0 +1,3289 @@
+[gd_scene load_steps=33 format=3 uid="uid://npwjthp1p6qc"]
+
+[ext_resource type="Texture2D" uid="uid://cqcjsrr7th81d" path="res://features/displays/backgrounds/space.webp" id="1_fbu0l"]
+[ext_resource type="Texture2D" uid="uid://bigyg1ju1jk5j" path="res://features/cards/defaults/background.png" id="1_meien"]
+[ext_resource type="Shader" uid="uid://csrq5bw6m580j" path="res://features/cards/backgrounds/background_shaders/snow.gdshader" id="2_mvxgq"]
+[ext_resource type="Texture2D" uid="uid://d0873hil8gtn7" path="res://features/cards/defaults/text.png" id="3_b8yv4"]
+[ext_resource type="FontFile" uid="uid://bou1r838wp6rv" path="res://component/fonts/Sagewold.ttf" id="4_roimj"]
+[ext_resource type="Texture2D" uid="uid://trqy6vky32ds" path="res://features/cards/defaults/title.png" id="5_85kme"]
+[ext_resource type="Shader" uid="uid://c0ggiieuut2cm" path="res://features/cards/icons/icon_shaders/ring.gdshader" id="6_hqj3l"]
+[ext_resource type="Texture2D" uid="uid://dilx7a7v2g5no" path="res://features/cards/icons/time.png" id="7_qhh1c"]
+[ext_resource type="Texture2D" uid="uid://df6a3tk8h88ff" path="res://features/cards/icons/influence.png" id="8_yqg3r"]
+[ext_resource type="Texture2D" uid="uid://b2wbilbwms3pr" path="res://features/cards/icons/impact.png" id="9_e4b1h"]
+[ext_resource type="Texture2D" uid="uid://dkfsx81lvxmio" path="res://features/cards/defaults/card_frame.png" id="10_hk08u"]
+[ext_resource type="Texture2D" uid="uid://cst5qen3l78fn" path="res://features/cards/backgrounds/black_hole.png" id="11_vk3vo"]
+[ext_resource type="Texture2D" uid="uid://cbiqaqbg5e7ry" path="res://features/cards/backgrounds/gold.png" id="12_tdr7g"]
+[ext_resource type="Texture2D" uid="uid://m81m0hcbk3do" path="res://features/cards/backgrounds/plants.png" id="13_3k5dm"]
+[ext_resource type="Texture2D" uid="uid://ce5svdmr5tlnm" path="res://features/cards/backgrounds/voyage.png" id="14_l0ahh"]
+[ext_resource type="Texture2D" uid="uid://0lxjf32p343q" path="res://features/cards/backgrounds/untrusted.png" id="15_w17ik"]
+[ext_resource type="Texture2D" uid="uid://bg2hdf5cbdjh3" path="res://features/cards/backgrounds/spark.png" id="16_t8mhv"]
+[ext_resource type="Texture2D" uid="uid://c17qgasebjqew" path="res://features/cards/backgrounds/prayer.png" id="17_unypn"]
+[ext_resource type="Texture2D" uid="uid://qc0f5b4ehnug" path="res://features/cards/backgrounds/tower.png" id="18_1y31r"]
+[ext_resource type="Texture2D" uid="uid://bhw7l53m8h85c" path="res://features/cards/backgrounds/shell.png" id="19_p0enu"]
+[ext_resource type="Texture2D" uid="uid://cfj1f7bnkaxwr" path="res://features/cards/backgrounds/blood_moon.png" id="20_vsqoo"]
+[ext_resource type="Texture2D" uid="uid://dp2eyy6i0duhd" path="res://features/cards/backgrounds/blazing_sun.png" id="21_8ii8l"]
+[ext_resource type="Texture2D" uid="uid://chg7cyy5c6yd2" path="res://features/cards/backgrounds/diamond.png" id="22_h00yt"]
+[ext_resource type="Texture2D" uid="uid://ct6cr5bll8heq" path="res://features/cards/backgrounds/life.png" id="23_l3mim"]
+[ext_resource type="Texture2D" uid="uid://dmdqe64fghg3v" path="res://features/cards/backgrounds/sunlight.png" id="24_jwxei"]
+[ext_resource type="Texture2D" uid="uid://6g8ia64vxsjm" path="res://features/cards/backgrounds/astroid.png" id="25_cx3vk"]
+
+[sub_resource type="GDScript" id="GDScript_cqbpj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2afod"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ejbv"]
+shader = ExtResource("2_mvxgq")
+shader_parameter/spread = 0.0
+shader_parameter/size = 15.0
+shader_parameter/snow_color = Color(0, 0, 0, 1)
+shader_parameter/snow_transparency = 0.2
+shader_parameter/speed = 0.5
+shader_parameter/wind = 0.43
+shader_parameter/num_of_layers = 40
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7nyos"]
+fractal_gain = 0.7
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d25dk"]
+noise = SubResource("FastNoiseLite_7nyos")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqsmb"]
+shader = ExtResource("6_hqj3l")
+shader_parameter/noise = SubResource("NoiseTexture2D_d25dk")
+shader_parameter/brightness = 2.5
+shader_parameter/time_scale = 1.0
+
+[node name="democard" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = SubResource("GDScript_cqbpj")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(1080, 1920)
+scale = Vector2(1.29808, 1.66667)
+texture = ExtResource("1_fbu0l")
+
+[node name="card1" type="Node2D" parent="."]
+position = Vector2(-160, 0)
+
+[node name="Card_Control" type="Control" parent="card1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card1/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("1_meien")
+
+[node name="Background_Shader" type="ColorRect" parent="card1/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card1/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card1/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card1/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card1/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card1/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card1/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card1/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card1/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card1/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card1/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card1/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card1/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card1/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card1"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card17" type="Node2D" parent="."]
+position = Vector2(-160, 0)
+
+[node name="Card_Control" type="Control" parent="card17"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Sprite2D" parent="card17/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("1_meien")
+
+[node name="Background_Shader" type="ColorRect" parent="card17/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Text_Control" type="Control" parent="card17"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Text" type="Sprite2D" parent="card17/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card17/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Title_Control" type="Control" parent="card17"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Title_Background" type="Sprite2D" parent="card17/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card17/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon_Control" type="Control" parent="card17"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Time_Shader" type="ColorRect" parent="card17/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="Sprite2D" parent="card17/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card17/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Influence Shader" type="ColorRect" parent="card17/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+metadata/_edit_use_anchors_ = true
+
+[node name="Influence" type="Sprite2D" parent="card17/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card17/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card17/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+metadata/_edit_use_anchors_ = true
+
+[node name="Impact" type="Sprite2D" parent="card17/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card17/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Frame" type="Sprite2D" parent="card17"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card2" type="Node2D" parent="."]
+position = Vector2(336, 0)
+
+[node name="Card_Control" type="Control" parent="card2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Sprite2D" parent="card2/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("11_vk3vo")
+
+[node name="Background_Shader" type="ColorRect" parent="card2/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Text_Control" type="Control" parent="card2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Text" type="Sprite2D" parent="card2/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card2/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Title_Control" type="Control" parent="card2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Title_Background" type="Sprite2D" parent="card2/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card2/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon_Control" type="Control" parent="card2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Time_Shader" type="ColorRect" parent="card2/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="Sprite2D" parent="card2/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card2/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Influence Shader" type="ColorRect" parent="card2/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+metadata/_edit_use_anchors_ = true
+
+[node name="Influence" type="Sprite2D" parent="card2/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card2/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card2/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+metadata/_edit_use_anchors_ = true
+
+[node name="Impact" type="Sprite2D" parent="card2/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card2/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Frame" type="Sprite2D" parent="card2"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card3" type="Node2D" parent="."]
+position = Vector2(832, 0)
+
+[node name="Card_Control" type="Control" parent="card3"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card3/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("12_tdr7g")
+
+[node name="Background_Shader" type="ColorRect" parent="card3/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card3"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card3/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card3/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card3"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card3/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card3/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card3"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card3/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card3/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card3/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card3/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card3/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card3/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card3/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card3/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card3/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card3"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card4" type="Node2D" parent="."]
+position = Vector2(1328, 0)
+
+[node name="Card_Control" type="Control" parent="card4"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card4/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("13_3k5dm")
+
+[node name="Background_Shader" type="ColorRect" parent="card4/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card4"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card4/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card4/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card4"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card4/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card4/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card4"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card4/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card4/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card4/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card4/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card4/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card4/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card4/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card4/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card4/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card4"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card5" type="Node2D" parent="."]
+position = Vector2(-160, 688)
+
+[node name="Card_Control" type="Control" parent="card5"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card5/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("14_l0ahh")
+
+[node name="Background_Shader" type="ColorRect" parent="card5/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -232.0
+offset_top = -328.0
+offset_right = 248.0
+offset_bottom = 344.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card5"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card5/Text_Control"]
+position = Vector2(16, 24)
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card5/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card5"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card5/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card5/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card5"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card5/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card5/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card5/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card5/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card5/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card5/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card5/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card5/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card5/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card5"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card6" type="Node2D" parent="."]
+position = Vector2(336, 688)
+
+[node name="Card_Control" type="Control" parent="card6"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card6/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("15_w17ik")
+
+[node name="Background_Shader" type="ColorRect" parent="card6/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card6"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card6/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card6/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card6"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card6/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card6/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card6"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card6/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card6/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card6/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card6/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card6/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card6/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card6/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card6/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card6/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card6"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card7" type="Node2D" parent="."]
+position = Vector2(832, 688)
+
+[node name="Card_Control" type="Control" parent="card7"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card7/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("16_t8mhv")
+
+[node name="Background_Shader" type="ColorRect" parent="card7/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card7"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card7/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card7/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card7"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card7/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card7/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card7"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card7/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card7/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card7/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card7/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card7/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card7/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card7/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card7/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card7/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card7"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card8" type="Node2D" parent="."]
+position = Vector2(1328, 688)
+
+[node name="Card_Control" type="Control" parent="card8"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card8/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("17_unypn")
+
+[node name="Background_Shader" type="ColorRect" parent="card8/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card8"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card8/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card8/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card8"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card8/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card8/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card8"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card8/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card8/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card8/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card8/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card8/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card8/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card8/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card8/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card8/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card8"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card9" type="Node2D" parent="."]
+position = Vector2(-160, 1376)
+
+[node name="Card_Control" type="Control" parent="card9"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card9/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("18_1y31r")
+
+[node name="Background_Shader" type="ColorRect" parent="card9/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card9"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card9/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card9/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card9"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card9/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card9/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card9"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card9/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card9/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card9/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card9/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card9/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card9/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card9/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card9/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card9/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card9"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card10" type="Node2D" parent="."]
+position = Vector2(336, 1376)
+
+[node name="Card_Control" type="Control" parent="card10"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card10/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("19_p0enu")
+
+[node name="Background_Shader" type="ColorRect" parent="card10/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card10"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card10/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card10/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card10"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card10/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card10/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card10"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card10/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card10/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card10/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card10/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card10/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card10/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card10/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card10/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card10/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card10"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card11" type="Node2D" parent="."]
+position = Vector2(832, 1376)
+
+[node name="Card_Control" type="Control" parent="card11"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card11/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("20_vsqoo")
+
+[node name="Background_Shader" type="ColorRect" parent="card11/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card11"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card11/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card11/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card11"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card11/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card11/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card11"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card11/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card11/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card11/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card11/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card11/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card11/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card11/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card11/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card11/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card11"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card12" type="Node2D" parent="."]
+position = Vector2(1328, 1376)
+
+[node name="Card_Control" type="Control" parent="card12"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card12/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("21_8ii8l")
+
+[node name="Background_Shader" type="ColorRect" parent="card12/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card12"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card12/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card12/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card12"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card12/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card12/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card12"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card12/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card12/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card12/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card12/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card12/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card12/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card12/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card12/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card12/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card12"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card13" type="Node2D" parent="."]
+position = Vector2(-160, 2064)
+
+[node name="Card_Control" type="Control" parent="card13"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card13/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("22_h00yt")
+
+[node name="Background_Shader" type="ColorRect" parent="card13/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card13"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card13/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card13/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card13"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card13/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card13/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card13"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card13/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card13/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card13/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card13/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card13/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card13/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card13/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card13/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card13/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card13"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card14" type="Node2D" parent="."]
+position = Vector2(336, 2064)
+
+[node name="Card_Control" type="Control" parent="card14"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card14/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("23_l3mim")
+
+[node name="Background_Shader" type="ColorRect" parent="card14/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card14"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card14/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card14/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card14"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card14/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card14/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card14"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card14/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card14/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card14/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card14/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card14/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card14/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card14/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card14/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card14/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card14"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card15" type="Node2D" parent="."]
+position = Vector2(832, 2064)
+
+[node name="Card_Control" type="Control" parent="card15"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card15/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("24_jwxei")
+
+[node name="Background_Shader" type="ColorRect" parent="card15/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card15"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card15/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card15/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card15"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card15/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card15/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card15"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card15/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card15/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card15/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card15/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card15/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card15/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card15/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card15/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card15/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card15"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
+
+[node name="card16" type="Node2D" parent="."]
+position = Vector2(1328, 2064)
+
+[node name="Card_Control" type="Control" parent="card16"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 456.0
+offset_right = 544.0
+offset_bottom = 496.0
+
+[node name="Background" type="Sprite2D" parent="card16/Card_Control"]
+material = SubResource("ShaderMaterial_2afod")
+texture = ExtResource("25_cx3vk")
+
+[node name="Background_Shader" type="ColorRect" parent="card16/Card_Control"]
+material = SubResource("ShaderMaterial_5ejbv")
+layout_mode = 0
+offset_left = -240.0
+offset_top = -336.0
+offset_right = 240.0
+offset_bottom = 336.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text_Control" type="Control" parent="card16"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Text" type="Sprite2D" parent="card16/Text_Control"]
+texture = ExtResource("3_b8yv4")
+
+[node name="Text_Label" type="Label" parent="card16/Text_Control"]
+layout_mode = 0
+offset_left = -184.0
+offset_top = -136.0
+offset_right = 184.0
+offset_bottom = 136.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -12
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 65
+text = "steal one card 
+from any
+opponents discard
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="Title_Control" type="Control" parent="card16"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 504.0
+offset_top = 616.0
+offset_right = 544.0
+offset_bottom = 656.0
+
+[node name="Title_Background" type="Sprite2D" parent="card16/Title_Control"]
+position = Vector2(-64, -448)
+texture = ExtResource("5_85kme")
+
+[node name="Title_Label" type="Label" parent="card16/Title_Control"]
+layout_mode = 0
+offset_left = -216.0
+offset_top = -480.0
+offset_right = 96.0
+offset_bottom = -416.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 45
+text = "from the ashes"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Icon_Control" type="Control" parent="card16"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Time_Shader" type="ColorRect" parent="card16/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 352.0
+offset_right = 392.0
+offset_bottom = 480.0
+color = Color(0.14, 0.255, 1, 0.2)
+
+[node name="Time" type="Sprite2D" parent="card16/Icon_Control"]
+position = Vector2(328, 416)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_qhh1c")
+
+[node name="Time_Label" type="Label" parent="card16/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 374.0
+offset_right = 360.0
+offset_bottom = 456.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Influence Shader" type="ColorRect" parent="card16/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 392.0
+color = Color(0.564, 1, 0.247, 0.2)
+
+[node name="Influence" type="Sprite2D" parent="card16/Icon_Control"]
+position = Vector2(328, 328)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_yqg3r")
+
+[node name="Influence_Label" type="Label" parent="card16/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 288.0
+offset_right = 360.0
+offset_bottom = 370.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Impact_Shader" type="ColorRect" parent="card16/Icon_Control"]
+material = SubResource("ShaderMaterial_kqsmb")
+layout_mode = 0
+offset_left = 272.0
+offset_top = 176.0
+offset_right = 392.0
+offset_bottom = 304.0
+color = Color(1, 0.179, 0.202, 0.2)
+
+[node name="Impact" type="Sprite2D" parent="card16/Icon_Control"]
+position = Vector2(328, 240)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e4b1h")
+
+[node name="Impact_Label" type="Label" parent="card16/Icon_Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 202.0
+offset_right = 360.0
+offset_bottom = 284.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_roimj")
+theme_override_font_sizes/font_size = 70
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Frame" type="Sprite2D" parent="card16"]
+position = Vector2(504, 456)
+texture = ExtResource("10_hk08u")
